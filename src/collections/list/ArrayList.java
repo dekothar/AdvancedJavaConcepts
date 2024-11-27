@@ -3,6 +3,7 @@ package collections.list;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.List;
@@ -45,7 +46,14 @@ public class ArrayList {
 		
 		//3. Given an ArrayList of strings, identify and print the duplicate elements.
 		List<String> words=Arrays.asList("apple", "banana", "apple", "cherry", "banana");
-		//words.stream().dis
+		Set<String> seen=new LinkedHashSet<>();
+		Set<String> duplicate=new LinkedHashSet<>();
+		for(String word:words) {
+			if(!seen.add(word)) {
+				duplicate.add(word);
+			}
+		}
+		System.out.println(duplicate);
 		
 		//4. Merge two arraylist and remove duplicates.
 		List<Integer> list2=Arrays.asList(1,2,6,7,9,12,16,18);
