@@ -1,0 +1,152 @@
+package collections.map;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.stream.Collectors;
+
+public class MapOperations {
+
+	public static void main(String[] args) {
+		
+		/**
+		 * 1.Create a HashMap to store student names (key) and their grades (value).
+           Add the following entries:
+
+          John -> 85
+          Emma -> 92
+          Ava -> 76
+          Mia -> 89
+          Print the map.
+         Update Emma’s grade to 95.
+         Remove Ava from the map.
+         Check if the map contains the key "John."
+		 */
+		Map<String,Integer> hmap=new HashMap<>();
+		hmap.put("John", 85);
+		hmap.put("Emma", 92);
+		hmap.put("Ava", 76);
+		hmap.put("Mia", 89);
+		System.out.println(hmap);
+		hmap.replace("Emma", 95);
+		hmap.remove("Ava");
+		System.out.println(hmap.containsKey("John"));
+		System.out.println(hmap);
+		
+		/**
+		 * Iterate through a Map
+
+           A for-each loop with entrySet().
+           A for-each loop with keySet() to get values using the key.
+           A for-each loop with values().
+		 */
+		hmap.entrySet().forEach(x->System.out.print(x + " "));
+		System.out.println("----------------------------");
+		for(String hmape:hmap.keySet()) {
+			System.out.println(hmape + " " + hmap.get(hmape));
+		}
+		hmap.values().forEach(x->System.out.println("value is" + x));
+		
+		List<String> words=List.of("apple", "banana", "apple", "orange", "banana", "apple");
+		Map<String,Integer> wordmap=new HashMap<>();
+		for(String word:words) {
+			wordmap.put(word, wordmap.getOrDefault(word, 0)+1);
+		}
+		System.out.println(wordmap);
+		
+		/**
+		 * Sort a Map by Keys
+
+          Create a TreeMap to store country names (key) and their populations (value).
+          Add the following entries:
+
+          India -> 1.4B
+          USA -> 331M
+          China -> 1.44B
+          Brazil -> 213M
+          Print the entries in sorted order of the keys.
+		 */
+		Map<Double,String> popcount=new TreeMap<>();
+		popcount.put(1.400000000,"India");
+		popcount.put(331000000.00,"USA");
+		popcount.put(1.4400000000,"CHina");
+		popcount.put(213000000.00,"Brazil");
+		System.out.println(popcount);
+		
+		/**
+		 * Find Maximum Value
+
+          Given a Map of products and their prices, write a program to find the product with the highest price.
+		 */
+		
+		Map<String,Integer> hmap2=new HashMap<>();
+		hmap2.put("Laptop", 800);
+		hmap2.put("Smartphone", 600);
+		hmap2.put("Tablet", 400);
+		hmap2.put("Monitor", 200);
+		
+		String productWithmaxvalue=hmap2.entrySet().stream().max(Comparator.comparingInt(x->x.getValue())).map(x->x.getKey()).get();
+		System.out.println("Product with the highest price:" + productWithmaxvalue + "-> " + hmap2.get(productWithmaxvalue));
+		
+		/**
+		 * 
+		 * Merge Two Maps
+
+         Write a program to merge two HashMaps:
+         Map 1: {"A": 1, "B": 2, "C": 3}
+         Map 2: {"B": 3, "C": 4, "D": 5}
+         Use the merge() method to sum up values for common keys.
+		 */
+		
+		Map<String,Integer> hmap4=new HashMap<>();
+		hmap4.put("A", 1);
+		hmap4.put("B", 2);
+		hmap4.put("C", 3);
+		
+		Map<String,Integer> hmap5=new HashMap<>();
+		hmap5.put("B", 3);
+		hmap5.put("C", 4);
+		hmap5.put("D", 5);
+		
+		hmap4.forEach((key, value) -> 
+        hmap5.merge(key, value, Integer::sum)
+    );
+
+    // Print the merged map
+    System.out.println("Merged Map: " + hmap5);
+    
+    /**
+     * Find Common Keys
+
+        Given two maps, find all keys that are common to both maps.
+        Example Input:
+       Map 1: {"A": 1, "B": 2, "C": 3}
+       Map 2: {"B": 4, "C": 5, "D": 6}
+     */
+    
+
+	Map<String,Integer> hmap6=new HashMap<>();
+	hmap6.put("A", 1);
+	hmap6.put("B", 2);
+	hmap6.put("C", 3);
+	
+	Map<String,Integer> hmap7=new HashMap<>();
+	hmap7.put("B", 4);
+	hmap7.put("C", 5);
+	hmap7.put("D", 6);
+    List<String> commonkeys=new ArrayList<>();
+    hmap6.forEach((key,value)->{
+    if(hmap7.containsKey(key)) {
+    	commonkeys.add(key);
+    }});
+    
+    System.out.println(commonkeys);
+    		
+    
+	}
+
+}
